@@ -60,6 +60,7 @@ jobs:
       run: |
         pip install pulumi pulumi_aws
 
+
     - name: Login to S3 for state management
       run: |
         pulumi login s3://pulumi-state-saturnhead
