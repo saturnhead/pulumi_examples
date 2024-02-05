@@ -33,7 +33,6 @@ jobs:
     
     - name: Select or Create Pulumi Stack
       run: pulumi stack init ${PULUMI_STACK} --secrets-provider="awskms://${{ env.AWS_KMS_KEY_ID }}"
-      working-directory: ${{ matrix.component }}
     
     - name: Run a plan
       run: pulumi preview --yes
