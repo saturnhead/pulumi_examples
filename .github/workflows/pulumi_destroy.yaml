@@ -1,7 +1,8 @@
-name: Deploy EC2 Instance
+name: Destroy EC2 Instance
 on: workflow_dispatch
 
-  deploy:
+jobs:
+  destroy:
     needs: setup-and-preview
     runs-on: ubuntu-latest
     defaults:
