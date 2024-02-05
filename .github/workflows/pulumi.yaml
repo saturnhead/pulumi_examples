@@ -35,7 +35,7 @@ jobs:
       run: pulumi stack init ${PULUMI_STACK} --secrets-provider="awskms://${{ env.AWS_KMS_KEY_ID }}"
     
     - name: Run a plan
-      run: pulumi preview --yes
+      run: pulumi preview
 
   deploy:
     needs: setup-and-preview
