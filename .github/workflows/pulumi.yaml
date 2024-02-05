@@ -36,7 +36,7 @@ jobs:
       continue-on-error: true
     
     - name: Select Pulumi Stack
-      run: pulumi stack select ${PULUMI_STACK}
+      run: pulumi stack select ${PULUMI_STACK} --secrets-provider="awskms://${{ env.AWS_KMS_KEY_ID }}"
     
     - name: Run a plan
       run: pulumi preview
@@ -65,7 +65,7 @@ jobs:
         pulumi login s3://pulumi-state-saturnhead
 
     - name: Select Pulumi Stack
-      run: pulumi stack select ${PULUMI_STACK}
+      run: pulumi stack select ${PULUMI_STACK} --secrets-provider="awskms://${{ env.AWS_KMS_KEY_ID }}"
 
     - name: Deploy
       run: pulumi up --yes
