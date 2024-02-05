@@ -3,12 +3,10 @@ on: workflow_dispatch
 
 jobs:
   destroy:
-    needs: setup-and-preview
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./aws_ec2
-    environment: production
     steps:
     - uses: actions/checkout@v2
     
@@ -20,7 +18,6 @@ jobs:
     - name: Install dependencies
       run: |
         pip install pulumi pulumi_aws
-
 
     - name: Login to S3 for state management
       run: |
