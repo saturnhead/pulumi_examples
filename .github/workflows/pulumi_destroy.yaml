@@ -1,0 +1,34 @@
+name: Deploy EC2 Instance
+on: workflow_dispatch
+
+  deploy:
+    needs: setup-and-preview
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./aws_ec2
+    environment: production
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install pulumi pulumi_aws
+
+
+    - name: Login to S3 for state management
+      run: |
+        pulumi login s3://pulumi-state-saturnhead
+
+    - name: Select Pulumi Stack
+      run: pulumi stack select ${PULUMI_STACK} --secrets-provider="awskms://${{ env.AWS_KMS_KEY_ID }}"
+
+    - name: Deploy
+      run: | 
+        pulumi stack change-secrets-provider "awskms://${{ env.AWS_KMS_KEY_ID }}"
+        pulumi down --yes
