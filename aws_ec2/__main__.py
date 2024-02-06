@@ -16,4 +16,3 @@ instance = ec2.Instance('my-instance',
 
 pulumi.export('instance_id', instance.id)
 pulumi.export('public_ip', instance.public_ip)
-
