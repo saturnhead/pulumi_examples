@@ -33,7 +33,7 @@ jobs:
     - name: Select Pulumi Stack
       run: pulumi stack select ${PULUMI_STACK} --secrets-provider="awskms://${{ env.AWS_KMS_KEY_ID }}"
 
-    - name: Deploy
+    - name: Destroy
       run: | 
         pulumi stack change-secrets-provider "awskms://${{ env.AWS_KMS_KEY_ID }}"
         pulumi down --yes
